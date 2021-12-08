@@ -5,27 +5,24 @@ import { QualificationLevel } from "../../infra/typeorm/entities/QualificationLe
 import { IQualificationLevelsRepository } from "../../repositories/IQualificationLevelsRepository";
 
 @injectable()
-class CreateQualificationLevelUseCase {
+class EditQualificationLevelUseCase {
     constructor(
         @inject("QualificationLevelsRepository")
         private qualificationLevelsRepository: IQualificationLevelsRepository
-    ) {} 
+    ) {}
 
     async execute({ id, level }: IQualificationLevel): Promise<QualificationLevel> {
-        if (!level) {
-            throw new AppError("O nível deve ser informado");
+        const qualificationLevel = await this.qualificationLevelsRepository.findById(id);
+        if (!qualificationLevel) {
+            throw new AppError("O nível informado não existe.");
         }
 
-        const qualificationLevelAlreadyExists = await this.qualificationLevelsRepository.findByQualificationName(level);
+        qualificationLevel.level = level;
 
-        if (qualificationLevelAlreadyExists) {
-            throw new AppError("O nível informado já existe");
-        }
+        const updatedQualificationLevel = await this.qualificationLevelsRepository.update(qualificationLevel);
 
-        const qualificationLevel = this.qualificationLevelsRepository.create({id, level});
-        
-        return qualificationLevel;
+        return updatedQualificationLevel;
     }
 }
 
-export { CreateQualificationLevelUseCase };
+export { EditQualificationLevelUseCase };

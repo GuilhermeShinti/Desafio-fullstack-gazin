@@ -2,7 +2,7 @@ import { getRepository, Repository } from "typeorm";
 
 import { QualificationLevel } from "../entities/QualificationLevel";
 import { IQualificationLevelsRepository } from "../../../repositories/IQualificationLevelsRepository";
-import { ICreateQualificationLevel } from "../../../dtos/ICreateQualificationLevel";
+import { IQualificationLevel } from "../../../dtos/IQualificationLevel";
 
 class QualificationLevelsRepository implements IQualificationLevelsRepository {
     private repository: Repository<QualificationLevel>
@@ -11,7 +11,15 @@ class QualificationLevelsRepository implements IQualificationLevelsRepository {
         this.repository = getRepository(QualificationLevel);
     }
 
-    async create({id, level}: ICreateQualificationLevel): Promise<QualificationLevel> {
+    async update({id, level}: IQualificationLevel): Promise<QualificationLevel> {
+        await this.repository.save({id, level});
+
+        const qualificationLevel = await this.repository.findOne(id);
+
+        return qualificationLevel;
+    }
+
+    async create({id, level}: IQualificationLevel): Promise<QualificationLevel> {
         const qualificationLevel = this.repository.create({
             id,
             level
@@ -26,8 +34,8 @@ class QualificationLevelsRepository implements IQualificationLevelsRepository {
         await this.repository.delete(id);
     }
 
-    findById(id: number): Promise<QualificationLevel> {
-        const qualificationLevel = this.repository.findOne(id);
+    async findById(id: number): Promise<QualificationLevel> {
+        const qualificationLevel = await this.repository.findOne(id);
         return qualificationLevel;
     }
 
