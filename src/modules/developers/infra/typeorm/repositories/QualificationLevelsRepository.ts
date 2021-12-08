@@ -11,11 +11,6 @@ class QualificationLevelsRepository implements IQualificationLevelsRepository {
         this.repository = getRepository(QualificationLevel);
     }
 
-    async findByQualificationName(level: string): Promise<QualificationLevel> {
-        const qualificationLevel = await this.repository.findOne({level});
-        return qualificationLevel;
-    }
-
     async create({id, level}: ICreateQualificationLevel): Promise<QualificationLevel> {
         const qualificationLevel = this.repository.create({
             id,
@@ -27,9 +22,22 @@ class QualificationLevelsRepository implements IQualificationLevelsRepository {
         return qualificationLevel;
     }
 
+    async delete(id: number): Promise<void> {
+        await this.repository.delete(id);
+    }
+
+    findById(id: number): Promise<QualificationLevel> {
+        const qualificationLevel = this.repository.findOne(id);
+        return qualificationLevel;
+    }
+
+    async findByQualificationName(level: string): Promise<QualificationLevel> {
+        const qualificationLevel = await this.repository.findOne({level});
+        return qualificationLevel;
+    }
+
     async list(): Promise<QualificationLevel[]> {
         const qualificationlevels = await this.repository.find();
-        console.log(qualificationlevels);
         return qualificationlevels;
     }
 }

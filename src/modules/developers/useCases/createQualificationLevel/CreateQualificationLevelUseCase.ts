@@ -1,12 +1,10 @@
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../shared/errors/AppError";
+import { ICreateQualificationLevel } from "../../dtos/ICreateQualificationLevel";
 import { QualificationLevel } from "../../infra/typeorm/entities/QualificationLevel";
 import { IQualificationLevelsRepository } from "../../repositories/IQualificationLevelsRepository";
 
-interface IRequest {
-    id: number;
-    level: string;
-}
+
 
 @injectable()
 class CreateQualificationLevelUseCase {
@@ -15,7 +13,7 @@ class CreateQualificationLevelUseCase {
         private qualificationLevelsRepository: IQualificationLevelsRepository
     ) {} 
 
-    async execute({ id, level }: IRequest): Promise<QualificationLevel> {
+    async execute({ id, level }: ICreateQualificationLevel): Promise<QualificationLevel> {
         if (!level) {
             throw new AppError("O nível deve ser informado");
         }
