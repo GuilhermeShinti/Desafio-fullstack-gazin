@@ -4,6 +4,7 @@ import { QualificationLevel } from "../infra/typeorm/entities/QualificationLevel
 interface IQualificationLevelsRepository {
     findByQualificationName(nivel: string) : Promise<QualificationLevel>;
     create(data: ICreateQualificationLevel) : Promise<QualificationLevel>;
+    list(): Promise<QualificationLevel[]>;
 }
 
 export { IQualificationLevelsRepository };
