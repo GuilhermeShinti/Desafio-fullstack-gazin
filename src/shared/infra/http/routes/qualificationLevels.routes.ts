@@ -13,7 +13,7 @@ const editQualificationLevelController = new EditQualificationLevelController();
 
 qualificationLevelsRoutes.get("/", listQualificationLevelController.handle);
 qualificationLevelsRoutes.post("/", createQualificationLevelController.handle);
-qualificationLevelsRoutes.delete("/", deleteQualificationLevelController.handle);
-qualificationLevelsRoutes.put("/", editQualificationLevelController.handle);
+qualificationLevelsRoutes.delete("/:id", deleteQualificationLevelController.handle);
+qualificationLevelsRoutes.put("/:id", editQualificationLevelController.handle);
 
 export { qualificationLevelsRoutes };

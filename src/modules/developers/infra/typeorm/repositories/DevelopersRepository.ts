@@ -1,6 +1,5 @@
 import { getRepository, Repository } from "typeorm";
 import { IDeveloper } from "../../../dtos/IDeveloper";
-import { IQualificationLevel } from "../../../dtos/IQualificationLevel";
 import { IDevelopersRepository } from "../../../repositories/IDevelopersRepository";
 import { Developer } from "../entities/Developer";
 
@@ -11,8 +10,19 @@ class DevelopersRepository implements IDevelopersRepository {
         this.repository = getRepository(Developer);
     }
 
+    async delete(id: number): Promise<void> {
+        await this.repository.delete({id});
+    }
+
+    async findById(id: number): Promise<Developer> {
+        const developer = await this.repository.findOne({id});
+        return developer;
+    }
+
     async findByQualificationLevelId(id: number): Promise<Developer[]> {
-        const developers = await this.repository.find({id});
+        const developers = await this.repository.find({
+            where: { qualificationLevelId: id}
+        });
         return developers;
     }
 

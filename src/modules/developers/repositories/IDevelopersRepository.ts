@@ -5,6 +5,8 @@ interface IDevelopersRepository {
     create(data: IDeveloper): Promise<Developer>;
     getAll(): Promise<Developer[]>;
     findByQualificationLevelId(id: number): Promise<Developer[]>;
+    findById(id: number): Promise<Developer>;
+    delete(id: number): Promise<void>;
 }
 
 export { IDevelopersRepository };

@@ -20,7 +20,7 @@ class DeleteQualificationLevelUseCase {
         }
 
         const developers = await this.developersRepository.findByQualificationLevelId(qualificationLevel.id);
-        if (developers) {
+        if (Array.isArray(developers) && developers.length > 0) {
             throw new AppError("O nível não pode ser excluido, pois há desenvolvedores associados à ele.")
         }
 
