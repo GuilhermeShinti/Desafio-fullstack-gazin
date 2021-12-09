@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../shared/errors/AppError";
-import { DevelopersRepository } from "../../infra/typeorm/repositories/DevelopersRepository";
+import { IDevelopersRepository } from "../../repositories/IDevelopersRepository";
 import { IQualificationLevelsRepository } from "../../repositories/IQualificationLevelsRepository";
 
 
@@ -10,7 +10,7 @@ class DeleteQualificationLevelUseCase {
         @inject("QualificationLevelsRepository")
         private qualificationLevelsRepository: IQualificationLevelsRepository,
         @inject("DevelopersRepository")
-        private developersRepository: DevelopersRepository
+        private developersRepository: IDevelopersRepository
     ) {}
 
     async execute(id: number): Promise<void> {
