@@ -1,19 +1,17 @@
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../shared/errors/AppError";
 import { ICreateDeveloper } from "../../dtos/ICreateDeveloper";
-import { IDeveloper } from "../../dtos/IDeveloper";
-import { IQualificationLevel } from "../../dtos/IQualificationLevel";
 import { Developer } from "../../infra/typeorm/entities/Developer";
-import { DevelopersRepository } from "../../infra/typeorm/repositories/DevelopersRepository";
-import { QualificationLevelsRepository } from "../../infra/typeorm/repositories/QualificationLevelsRepository";
+import { IDevelopersRepository } from "../../repositories/IDevelopersRepository";
+import { IQualificationLevelsRepository } from "../../repositories/IQualificationLevelsRepository";
 
 @injectable()
 class CreateDeveloperUseCase {
     constructor(
         @inject("DevelopersRepository")
-        private developersRepository: DevelopersRepository,
+        private developersRepository: IDevelopersRepository,
         @inject("QualificationLevelsRepository")
-        private qualificationLevelsRepository: QualificationLevelsRepository,
+        private qualificationLevelsRepository: IQualificationLevelsRepository,
     ) {}
 
     async execute({id, name, gender, birthdate, hobby, qualificationLevelId}: ICreateDeveloper): Promise<Developer> {
