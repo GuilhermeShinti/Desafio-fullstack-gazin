@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Developer } from "./Developer";
 
 @Entity("qualificationLevels")
 class QualificationLevel {
@@ -7,6 +8,9 @@ class QualificationLevel {
     
     @Column()
     level: string;
+
+    @OneToMany(() => Developer, developer => developer.qualificationLevel)
+    developers: Developer[]
 }
 
 export { QualificationLevel };

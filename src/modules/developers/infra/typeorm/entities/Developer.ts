@@ -1,4 +1,5 @@
-import { AfterInsert, AfterLoad, AfterUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { AfterInsert, AfterLoad, AfterUpdate, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { QualificationLevel } from "./QualificationLevel";
 
 @Entity("developers")
 class Developer {
@@ -7,6 +8,10 @@ class Developer {
 
     @Column()
     qualificationLevelId: number;
+
+    @ManyToOne(() => QualificationLevel, user => user.developers)
+    @JoinColumn({ name: "qualificationLevelId" })
+    qualificationLevel: QualificationLevel;
 
     @Column()
     name: string;

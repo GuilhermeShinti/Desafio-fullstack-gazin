@@ -16,15 +16,15 @@ class DevelopersRepository implements IDevelopersRepository {
         return developers;
     }
     
-    async create({id, name, gender, birthdate, hobby, qualificationLevelId}: IDeveloper): Promise<Developer> {
-        const developer = this.repository.create({
+    async create({id, name, gender, birthdate, hobby, qualificationLevel }: IDeveloper): Promise<Developer> {
+        const developer = await this.repository.create({
             id,
-            qualificationLevelId,
+            qualificationLevel: qualificationLevel,
             name,
             gender,
             birthdate, 
             hobby
-        })
+        });
 
         await this.repository.save(developer);
 
