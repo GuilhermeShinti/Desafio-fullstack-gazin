@@ -10,6 +10,11 @@ class DevelopersRepository implements IDevelopersRepository {
     constructor() {
         this.repository = getRepository(Developer);
     }
+
+    async list(): Promise<Developer[]> {
+        const developers = await this.repository.find();
+        return developers;
+    }
     
     async create({id, name, gender, birthdate, hobby, qualificationLevelId}: IDeveloper): Promise<Developer> {
         const developer = this.repository.create({
