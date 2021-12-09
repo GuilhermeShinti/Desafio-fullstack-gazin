@@ -12,9 +12,7 @@ class QualificationLevelsRepository implements IQualificationLevelsRepository {
     }
 
     async update({id, level}: IQualificationLevel): Promise<QualificationLevel> {
-        await this.repository.save({id, level});
-
-        const qualificationLevel = await this.repository.findOne(id);
+        const qualificationLevel = await this.repository.save({id, level});
 
         return qualificationLevel;
     }

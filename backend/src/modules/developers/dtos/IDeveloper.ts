@@ -2,6 +2,7 @@ import { IQualificationLevel } from "./IQualificationLevel";
 
 interface IDeveloper {
     id: number;
+    qualificationLevelId: number;
     qualificationLevel: IQualificationLevel;
     name: string;
     gender: string;

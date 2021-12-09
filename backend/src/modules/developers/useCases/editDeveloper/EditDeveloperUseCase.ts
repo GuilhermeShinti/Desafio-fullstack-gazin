@@ -26,11 +26,15 @@ class EditDeveloperUseCase {
         }
 
         developer.name = name;
+        developer.birthdate = birthdate;
         developer.gender = gender;
         developer.hobby = hobby;
+        developer.qualificationLevelId = qualificationLevelId;
         developer.qualificationLevel = qualificationLevel;
 
-        return developer;
+        const updatedDeveloper = await this.developerRepository.update(developer);
+        
+        return updatedDeveloper;
     }
 }
 

@@ -10,12 +10,20 @@ class DevelopersRepository implements IDevelopersRepository {
         this.repository = getRepository(Developer);
     }
 
+    async update({id, name, gender, birthdate, hobby, qualificationLevelId, qualificationLevel}: IDeveloper): Promise<Developer> {
+        const developer = await this.repository.save({id, name, gender, birthdate, hobby, qualificationLevelId, qualificationLevel});
+
+        // await this.repository.findOne(id);
+
+        return developer;
+    }
+
     async delete(id: number): Promise<void> {
         await this.repository.delete({id});
     }
 
     async findById(id: number): Promise<Developer> {
-        const developer = await this.repository.findOne({id});
+        const developer = await this.repository.findOne(id);
         return developer;
     }
 
