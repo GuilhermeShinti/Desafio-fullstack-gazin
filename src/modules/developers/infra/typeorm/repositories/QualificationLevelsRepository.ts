@@ -44,7 +44,7 @@ class QualificationLevelsRepository implements IQualificationLevelsRepository {
         return qualificationLevel;
     }
 
-    async list(): Promise<QualificationLevel[]> {
+    async getAll(): Promise<QualificationLevel[]> {
         const qualificationlevels = await this.repository.find();
         return qualificationlevels;
     }

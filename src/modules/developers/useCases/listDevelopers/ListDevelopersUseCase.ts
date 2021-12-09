@@ -10,7 +10,7 @@ class ListDevelopersUseCase {
     ){}
 
     async execute(): Promise<Developer[]> {
-        const developers = await this.developersRepository.list();
+        const developers = await this.developersRepository.getAll();
         return developers;
     }
 }

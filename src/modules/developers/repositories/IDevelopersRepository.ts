@@ -3,7 +3,8 @@ import { Developer } from "../infra/typeorm/entities/Developer";
 
 interface IDevelopersRepository {
     create(data: IDeveloper): Promise<Developer>;
-    list(): Promise<Developer[]>;
+    getAll(): Promise<Developer[]>;
+    findByQualificationLevelId(id: number): Promise<Developer[]>;
 }
 
 export { IDevelopersRepository };

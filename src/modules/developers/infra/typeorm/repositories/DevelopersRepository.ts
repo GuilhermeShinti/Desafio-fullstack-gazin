@@ -11,7 +11,12 @@ class DevelopersRepository implements IDevelopersRepository {
         this.repository = getRepository(Developer);
     }
 
-    async list(): Promise<Developer[]> {
+    async findByQualificationLevelId(id: number): Promise<Developer[]> {
+        const developers = await this.repository.find({id});
+        return developers;
+    }
+
+    async getAll(): Promise<Developer[]> {
         const developers = await this.repository.find();
         return developers;
     }

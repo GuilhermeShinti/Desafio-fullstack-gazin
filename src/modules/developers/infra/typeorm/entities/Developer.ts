@@ -9,7 +9,7 @@ class Developer {
     @Column()
     qualificationLevelId: number;
 
-    @ManyToOne(() => QualificationLevel, user => user.developers)
+    @ManyToOne(() => QualificationLevel, user => user.developers, { eager: true })
     @JoinColumn({ name: "qualificationLevelId" })
     qualificationLevel: QualificationLevel;
 

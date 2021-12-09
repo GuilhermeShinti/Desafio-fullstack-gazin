@@ -10,7 +10,7 @@ class ListQualificationLevelsUseCase {
     ) {}
 
     async execute(): Promise<QualificationLevel[]> {
-        const qualificationLevels = await this.qualificationlevelsRepository.list();
+        const qualificationLevels = await this.qualificationlevelsRepository.getAll();
         return qualificationLevels;
     }
 }

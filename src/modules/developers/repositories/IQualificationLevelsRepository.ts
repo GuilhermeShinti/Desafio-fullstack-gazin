@@ -5,7 +5,7 @@ interface IQualificationLevelsRepository {
     findById(id: number): Promise<QualificationLevel>;
     findByQualificationName(nivel: string) : Promise<QualificationLevel>;
     create(data: IQualificationLevel) : Promise<QualificationLevel>;
-    list(): Promise<QualificationLevel[]>;
+    getAll(): Promise<QualificationLevel[]>;
     delete(id: number): Promise<void>;
     update(data: IQualificationLevel): Promise<QualificationLevel>;
 }
