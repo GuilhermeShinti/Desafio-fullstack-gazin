@@ -14,6 +14,10 @@ export const Content = styled.div`
         width: 100%;
         border-spacing: 0 0.5rem;
 
+        tbody > tr {
+            background: var(--shape);
+        }
+
         th {
             padding: 1rem 2rem;
             font-weight: 400;
@@ -23,9 +27,8 @@ export const Content = styled.div`
         }
 
         td {
-            padding: 1rem 2rem;
+            padding: 0.5rem 2rem;
             color: var(--text-body);
-            background: var(--shape);
             border: 0;
             border-radius: 0.25rem;
 
@@ -33,8 +36,9 @@ export const Content = styled.div`
                 color: var(--firstchild);
             }
 
-            .actionButtons {
-                float: right;
+            &.actionButtons {
+                display: flex;
+                justify-content: end;
             }
 
             button.edit  {
@@ -46,8 +50,9 @@ export const Content = styled.div`
             }
 
             button.edit, button.delete  {
-                padding: 0 2rem;
-                height: 3rem;
+                margin-left: 1rem;
+                padding: 0 1rem;
+                height: 2rem;
                 font-size: 1rem;
                 color: #ffffff;
                 border: 0;
