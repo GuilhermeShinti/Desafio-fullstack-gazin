@@ -12,9 +12,19 @@ interface IQualificationLevel
 export function ListQualificationLevel() {
     const [qualificationLevels, setQualificationLevels] = useState<IQualificationLevel[]>([]);
 
+    async function loadQualificationLevels() {
+        await api.get('levels').then(response => setQualificationLevels(response.data));
+    }
+
     useEffect(() => {
-        api.get('levels').then(response => setQualificationLevels(response.data));
+        loadQualificationLevels();
     }, [])
+
+    async function onClickDeleteQualificationLevel(id: number) {
+        await api.delete(`levels/${id}`);
+        loadQualificationLevels();
+    }
+
 
     return (
         <>
@@ -36,7 +46,10 @@ export function ListQualificationLevel() {
                                         <tr key={qualification.id}>
                                             <td>{qualification.level}</td>
                                             <td>1</td>
-                                            <td className="actionButtons"><button className="edit">Editar</button><button className="delete">Excluir</button></td>
+                                            <td className="actionButtons">
+                                                <button className="edit">Editar</button>
+                                                <button className="delete" onClick={() => {onClickDeleteQualificationLevel(Number(qualification.id))}}>Excluir</button>
+                                            </td>
                                         </tr>
                                     )
                                 )
