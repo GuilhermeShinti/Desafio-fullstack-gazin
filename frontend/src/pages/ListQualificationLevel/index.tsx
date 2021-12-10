@@ -18,7 +18,7 @@ export function ListQualificationLevel() {
 
     return (
         <>
-            <Header />
+            <Header buttonText="Novo Nível"  goTo="new"/>
             <Container>
                 <Content>             
                     <table>
@@ -26,6 +26,7 @@ export function ListQualificationLevel() {
                             <tr>
                                 <th>Nível</th>
                                 <th>Desenvolvedores</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,6 +36,7 @@ export function ListQualificationLevel() {
                                         <tr key={qualification.id}>
                                             <td>{qualification.level}</td>
                                             <td>1</td>
+                                            <td className="actionButtons"><button className="edit">Editar</button><button className="delete">Excluir</button></td>
                                         </tr>
                                     )
                                 )
