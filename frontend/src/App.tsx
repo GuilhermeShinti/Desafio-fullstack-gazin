@@ -1,13 +1,14 @@
-import { Header } from "./components/Header";
-import { ListQualificationLevel } from "./pages/ListQualificationLevel";
+import { BrowserRouter } from "react-router-dom";
+import { Router } from "./routes";
+
 import { GlobalStyle } from "./styles/global";
+
 
 export function App() {
     return (
-        <>
+        <BrowserRouter>
             <GlobalStyle />
-            <Header />
-            <ListQualificationLevel />
-        </>
+            <Router />
+        </BrowserRouter>
     );
 }

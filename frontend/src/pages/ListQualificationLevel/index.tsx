@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Header } from "../../components/Header";
 import { api } from "../../services/api";
 import { Container, Content } from "./styles";
 
@@ -16,29 +17,32 @@ export function ListQualificationLevel() {
     }, [])
 
     return (
-        <Container>
-            <Content>             
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nível</th>
-                            <th>Desenvolvedores</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            qualificationLevels.map(qualification => 
-                                (
-                                    <tr key={qualification.id}>
-                                        <td>{qualification.level}</td>
-                                        <td>1</td>
-                                    </tr>
+        <>
+            <Header />
+            <Container>
+                <Content>             
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nível</th>
+                                <th>Desenvolvedores</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                qualificationLevels.map(qualification => 
+                                    (
+                                        <tr key={qualification.id}>
+                                            <td>{qualification.level}</td>
+                                            <td>1</td>
+                                        </tr>
+                                    )
                                 )
-                            )
-                        }
-                    </tbody>
-                </table>
-            </Content>
-        </Container>
+                            }
+                        </tbody>
+                    </table>
+                </Content>
+            </Container>
+        </>
     );
 }
