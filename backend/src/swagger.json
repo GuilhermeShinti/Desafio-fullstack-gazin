@@ -5,7 +5,335 @@
         "description": "backend desenvolvido para o desafio fullstack da gazin",
         "version": "1.0.0",
         "contact": {
+            "name": "Guilherme Shinti",
             "email": "guilhermeshinti@gmail.com"
+        }
+    },
+    "paths": {
+        "/levels": {
+            "post": {
+                "tags": ["Nível"],
+                "summary": "Criar um nível",
+                "description": "",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "level": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "level": "Pleno exemplo"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Nível criado com sucesso."
+                    },
+                    "400": {
+                        "description": "Erro de validação."
+                    }
+                }
+
+            },
+            "get": {
+                "tags": ["Nível"],
+                "summary": "Obter lista de Níveis",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Obtido lista com sucesso.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "number"
+                                            },
+                                            "level": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        },
+        "/levels/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "Id único do nível cadastrado",
+                    "type": "number"
+                }
+            ],
+            "put": {
+                "tags": ["Nível"],
+                "summary": "Editar nível pelo Id.",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Id único do nível cadastrado",
+                        "type": "number"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "level": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "level": "Pleno exemplo editado"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Nível editado com sucesso."
+                    },
+                    "400": {
+                        "description": "Erro de validação."
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Nível"],
+                "summary": "Excluir nível pelo Id.",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Id único do nível cadastrado",
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Nível removido com sucesso."
+                    },
+                    "400": {
+                        "description": "Erro de validação."
+                    }
+                }
+            }
+        },
+        "/developers": {
+            "post":  {
+                "tags": ["Desenvolvedor"],
+                "summary": "Criar um desenvolvedor",
+                "description": "",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "qualificationLevelId": {
+                                        "type": "number"
+                                    },
+                                    "birthdate": {
+                                        "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string"
+                                    },
+                                    "hobby": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "name": "Desenvolvedor",
+                                "qualificationLevelId": 1,
+                                "birthdate": "1994-02-25T00:00:00",
+                                "gender": "M",
+                                "hobby": "games"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Desenvolvedor criado com sucesso."
+                    },
+                    "400": {
+                        "description": "Erro de validação."
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Desenvolvedor"],
+                "summary": "Obter lista de Desenvolvedores",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "Obtido lista com sucesso.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "qualificationLevelId": {
+                                                "type": "number"
+                                            },
+                                            "qualificationLevel": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number"
+                                                    },
+                                                    "level": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                                
+                                            },
+                                            "birthdate": {
+                                                "type": "string"
+                                            },
+                                            "age": {
+                                                "type": "number"
+                                            },
+                                            "gender": {
+                                                "type": "string"
+                                            },
+                                            "hobby": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/developers/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "Id único do desenvolvedor cadastrado",
+                    "type": "number"
+                }
+            ],
+            "put": {
+                "tags": ["Desenvolvedor"],
+                "summary": "Editar desenvolvedor pelo Id.",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Id único do desenvolvedor cadastrado",
+                        "type": "number"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "qualificationLevelId": {
+                                        "type": "number"
+                                    },
+                                    "birthdate": {
+                                        "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string"
+                                    },
+                                    "hobby": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "name": "Desenvolvedor editado",
+                                "qualificationLevelId": 2,
+                                "birthdate": "1994-02-25T00:00:00",
+                                "gender": "O",
+                                "hobby": "Escutar música"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Desenvolvedor editado com sucesso."
+                    },
+                    "400": {
+                        "description": "Erro de validação."
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Desenvolvedor"],
+                "summary": "Excluir desenvolvedor pelo Id.",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Id único do desenvolvedor cadastrado",
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Desenvolvedor removido com sucesso."
+                    },
+                    "400": {
+                        "description": "Erro de validação."
+                    }
+                }
+            }
         }
     }
 }
