@@ -23,7 +23,7 @@ export function ListDevelopers() {
     }, [])
 
     async function onClickDeleteDeveloper(id: number) {
-        await api.delete(`levels/${id}`);
+        await api.delete(`developers/${id}`);
         loadQualificationLevels();
     }
 
