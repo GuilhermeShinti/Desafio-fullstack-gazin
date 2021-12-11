@@ -6,7 +6,7 @@ export const Container = styled.header`
 
 export const Content = styled.div`
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     margin: 0 auto;
     padding: 2rem 1rem 2rem;
     max-width: 1120px;

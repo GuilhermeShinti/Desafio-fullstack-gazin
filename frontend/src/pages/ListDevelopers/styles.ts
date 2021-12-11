@@ -2,12 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     margin-top: 2rem;
-`;
 
-export const Content = styled.div`
-
-    max-width: 1120px;
-    margin: 0 auto;
     --firstchild: #363636;
 
     table {
@@ -30,10 +25,14 @@ export const Content = styled.div`
             padding: 0.5rem 2rem;
             color: var(--text-body);
             border: 0;
-            border-radius: 0.25rem;
 
             &:first-child {
                 color: var(--firstchild);
+            }
+
+            &:first-child,
+            &:first-child {
+                border-radius: 0.25rem;
             }
 
             &.actionButtons {
@@ -65,4 +64,5 @@ export const Content = styled.div`
             }
         }
     }
+
 `;

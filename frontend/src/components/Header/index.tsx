@@ -10,6 +10,7 @@ export function Header({buttonText, goTo} : HeaderProps) {
     return (
         <Container>
             <Content>
+                <Link className="linkButton" to="/"><button>Home</button></Link>
                 <Link className="linkButton" to={goTo}><button>{buttonText}</button></Link>
             </Content>
         </Container>

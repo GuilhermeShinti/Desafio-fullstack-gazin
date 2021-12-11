@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { Content } from "../../components/Content";
 import { Header } from "../../components/Header";
 import { api } from "../../services/api";
-import { Container, Content } from "./styles";
+import { Container } from "./styles";
 
 interface IDevelopers
 {
