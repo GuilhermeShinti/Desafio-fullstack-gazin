@@ -26,14 +26,13 @@ export const Container = styled.div`
             color: var(--text-body);
             border: 0;
             
-
             &:first-child {
                 color: var(--firstchild);
+                border-radius: 0.25rem 0;
             }
 
-            &:first-child,
             &:last-child {
-                border-radius: 0.25rem;
+                border-radius: 0.25rem 0;
             }
 
             &.actionButtons {

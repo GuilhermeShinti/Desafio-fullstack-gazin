@@ -28,11 +28,11 @@ export const Container = styled.div`
 
             &:first-child {
                 color: var(--firstchild);
+                border-radius: 0.25rem 0;
             }
 
-            &:first-child,
             &:last-child {
-                border-radius: 0.25rem;
+                border-radius: 0.25rem 0;
             }
 
             &.actionButtons {
