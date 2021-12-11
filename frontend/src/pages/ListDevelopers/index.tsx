@@ -37,7 +37,7 @@ export function ListDevelopers() {
                         <thead>
                             <tr>
                                 <th>Nome</th>
-                                <th>idade</th>
+                                <th>Idade</th>
                                 <th></th>
                             </tr>
                         </thead>
