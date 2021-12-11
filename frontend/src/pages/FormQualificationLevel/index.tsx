@@ -1,23 +1,23 @@
 import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Content } from "../../components/Content";
 import { Header } from "../../components/Header";
 import { api } from "../../services/api";
 import { Container } from "./styles";
 
 export function FormQualificationLevel() {
-    let navigate = useNavigate();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const idState = location.state && location.state.idState;
+    const levelState = location.state && location.state.levelState;
 
-    const [id, setId] = useState<number>(0)
-    const [level, setLevel] = useState<string>("")
+    const [id, setId] = useState<number>(idState ? Number(idState) : 0);
+    const [level, setLevel] = useState<string>(levelState ? levelState : "");
 
     async function handleSubmitQualificationLevel(event: FormEvent) {
         event.preventDefault();
 
         await api.post('levels', { id, level });
-
-        setId(0);
-        setLevel("");
         navigate("/levels");
     }
 

@@ -9,6 +9,7 @@ export function AppRoutes() {
             <Route path="/" element={<Home />} />
             <Route path="/levels" element={<ListQualificationLevel />} />
             <Route path="/levels/new" element={<FormQualificationLevel />} />
+            <Route path="/levels/:id" element={<FormQualificationLevel />} />
             <Route path="*" element={<>{"404"}</>} />
         </Routes>
     )

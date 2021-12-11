@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { api } from "../../services/api";
 import { Container, Content } from "./styles";
@@ -10,6 +11,7 @@ interface IQualificationLevel
 }
 
 export function ListQualificationLevel() {
+    let navigate = useNavigate();
     const [qualificationLevels, setQualificationLevels] = useState<IQualificationLevel[]>([]);
 
     async function loadQualificationLevels() {
@@ -23,6 +25,15 @@ export function ListQualificationLevel() {
     async function onClickDeleteQualificationLevel(id: number) {
         await api.delete(`levels/${id}`);
         loadQualificationLevels();
+    }
+
+    async function onClickEditQualificationLevel(qualification: IQualificationLevel) {
+        navigate(`/levels/${qualification.id}`, {
+            state: {
+                idState: qualification.id,
+                levelState: qualification.level,
+            }
+        })
     }
 
 
@@ -47,7 +58,7 @@ export function ListQualificationLevel() {
                                             <td>{qualification.level}</td>
                                             <td>1</td>
                                             <td className="actionButtons">
-                                                <button className="edit">Editar</button>
+                                                <button className="edit" onClick={() => {onClickEditQualificationLevel(qualification)}}>Editar</button>
                                                 <button className="delete" onClick={() => {onClickDeleteQualificationLevel(Number(qualification.id))}}>Excluir</button>
                                             </td>
                                         </tr>
