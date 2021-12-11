@@ -1,0 +1,11 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Backend desafio fullstack",
+        "description": "backend desenvolvido para o desafio fullstack da gazin",
+        "version": "1.0.0",
+        "contact": {
+            "email": "guilhermeshinti@gmail.com"
+        }
+    }
+}
