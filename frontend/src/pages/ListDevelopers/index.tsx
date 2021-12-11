@@ -22,7 +22,7 @@ export function ListDevelopers() {
         loadQualificationLevels();
     }, [])
 
-    async function onClickDeleteQualificationLevel(id: number) {
+    async function onClickDeleteDeveloper(id: number) {
         await api.delete(`levels/${id}`);
         loadQualificationLevels();
     }
@@ -50,7 +50,7 @@ export function ListDevelopers() {
                                             <td>{developer.age}</td>
                                             <td className="actionButtons">
                                                 <button className="edit" onClick={() => {}}>Editar</button>
-                                                <button className="delete" onClick={() => {onClickDeleteQualificationLevel(Number(developer.id))}}>Excluir</button>
+                                                <button className="delete" onClick={() => {onClickDeleteDeveloper(Number(developer.id))}}>Excluir</button>
                                             </td>
                                         </tr>
                                     )
