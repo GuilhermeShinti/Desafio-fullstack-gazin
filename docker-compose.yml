@@ -16,6 +16,7 @@ services:
     backend:
         build: ./backend
         container_name: backend
+        command: ["npm", "run", "server"]
         ports:
             - 3333:3333
             - 9229:9229
