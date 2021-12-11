@@ -32,7 +32,7 @@ export const Container = styled.div`
             }
 
             &:first-child,
-            &:first-child {
+            &:last-child {
                 border-radius: 0.25rem;
             }
 
