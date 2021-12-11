@@ -12,7 +12,7 @@ interface IQualificationLevel
 }
 
 export function ListQualificationLevel() {
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const [qualificationLevels, setQualificationLevels] = useState<IQualificationLevel[]>([]);
 
     async function loadQualificationLevels() {

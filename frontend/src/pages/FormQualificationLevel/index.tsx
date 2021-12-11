@@ -8,8 +8,7 @@ import { Container } from "./styles";
 export function FormQualificationLevel() {
     const navigate = useNavigate();
     const location = useLocation();
-    const idState = location.state && location.state.idState;
-    const levelState = location.state && location.state.levelState;
+    const { idState, levelState } = location.state || {}
 
     const [id, setId] = useState<number>(idState ? Number(idState) : 0);
     const [level, setLevel] = useState<string>(levelState ? levelState : "");
@@ -17,7 +16,13 @@ export function FormQualificationLevel() {
     async function handleSubmitQualificationLevel(event: FormEvent) {
         event.preventDefault();
 
-        await api.post('levels', { id, level });
+        const isNew = (id === 0);
+        if (isNew) {
+            await api.post('levels', { id, level });
+        } else {
+            await api.put(`levels/${id}`, { id, level });
+        }
+
         navigate("/levels");
     }
 
@@ -29,7 +34,7 @@ export function FormQualificationLevel() {
                     <h1>Novo Nível</h1>
                     <hr />
                     <form onSubmit={handleSubmitQualificationLevel}>
-                        <input name="id" disabled placeholder="id" value={id} onChange={({ target }) => setId(Number(target.value))}></input>
+                        <input name="id" hidden disabled placeholder="id" value={id} onChange={({ target }) => setId(Number(target.value))}></input>
                         <input name="level" placeholder="nível" value={level} required onChange={({ target }) => setLevel(target.value)}></input>
                         <button type="submit">Salvar</button>
                     </form> 
