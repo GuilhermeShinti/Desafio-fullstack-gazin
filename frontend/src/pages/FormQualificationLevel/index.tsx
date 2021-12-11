@@ -4,6 +4,7 @@ import { Content } from "../../components/Content";
 import { Header } from "../../components/Header";
 import { api } from "../../services/api";
 import { Container } from "./styles";
+import { toast } from 'react-toastify';
 
 export function FormQualificationLevel() {
     const navigate = useNavigate();
@@ -15,15 +16,21 @@ export function FormQualificationLevel() {
 
     async function handleSubmitQualificationLevel(event: FormEvent) {
         event.preventDefault();
-
         const isNew = (id === 0);
-        if (isNew) {
-            await api.post('levels', { id, level });
-        } else {
-            await api.put(`levels/${id}`, { id, level });
-        }
 
-        navigate("/levels");
+        try {    
+            if (isNew) {
+                await api.post('levels', { id, level });
+                toast.success("Nível criado com sucesso.");
+            } else {
+                await api.put(`levels/${id}`, { id, level });
+                toast.success("Nível editado com sucesso.");
+            }
+    
+            navigate("/levels");
+        } catch (err: any) {
+            toast.error(err.response.data.message);
+        }
     }
 
     return (

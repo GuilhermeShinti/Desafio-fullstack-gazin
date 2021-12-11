@@ -4,6 +4,8 @@ import { Content } from "../../components/Content";
 import { Header } from "../../components/Header";
 import { api } from "../../services/api";
 import { Container } from "./styles";
+import { toast } from 'react-toastify';
+import { confirmAlert } from 'react-confirm-alert';
 
 interface IQualificationLevel
 {
@@ -36,8 +38,31 @@ export function ListDevelopers() {
     }, [])
 
     async function onClickDeleteDeveloper(id: number) {
-        await api.delete(`developers/${id}`);
-        loadDevelopers();
+
+        const confirmDelete = async function(id: number) {
+            try {
+                await api.delete(`developers/${id}`);
+                loadDevelopers();
+                toast.success("Desenvolvedor removido com sucesso.");
+            } catch (err: any) {
+                toast.error(err.response.data.message);
+            }
+        }
+
+        confirmAlert({
+            title: 'Confirmação',
+            message: 'Deseja realmente excluir o desenvolvedor?',
+            buttons: [
+                {
+                    label: 'Sim',
+                    onClick: () => {confirmDelete(id)}
+                },
+                {
+                    label: 'Não',
+                    onClick: () => {}
+                }
+            ]
+        });
     }
 
     async function onClickEditDeveloper(developer: IDevelopers) {

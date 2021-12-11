@@ -5,6 +5,7 @@ import { Header } from "../../components/Header";
 import { api } from "../../services/api";
 import { Container } from "./styles";
 import DatePicker from "react-datepicker";
+import { toast } from 'react-toastify';
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -46,15 +47,23 @@ export function Formdeveloper() {
         event.preventDefault();
 
         const developer = { id, name, qualificationLevelId, birthdate, gender, hobby};
-
         const isNew = (id === 0);
-        if (isNew) {
-            await api.post('developers', developer);
-        } else {
-            await api.put(`developers/${id}`, developer);
+
+        try {    
+            if (isNew) {
+                await api.post('developers', developer);
+                toast.success("Desenvolvedor criado com sucesso.");
+            } else {
+                await api.put(`developers/${id}`, developer);
+                toast.success("Desenvolvedor editado com sucesso.");
+            }
+    
+            navigate("/developers");
+        } catch (err: any) {
+            toast.error(err.response.data.message);
         }
         
-        navigate("/developers");
+        
     }
 
     return (
