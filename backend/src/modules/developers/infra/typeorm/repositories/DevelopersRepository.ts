@@ -1,4 +1,6 @@
 import { getRepository, Repository } from "typeorm";
+import { IFilter } from "../../../../../shared/dtos/IFilter";
+import { IPagination } from "../../../../../shared/dtos/IPagination";
 import { IDeveloper } from "../../../dtos/IDeveloper";
 import { IDevelopersRepository } from "../../../repositories/IDevelopersRepository";
 import { Developer } from "../entities/Developer";
@@ -31,9 +33,17 @@ class DevelopersRepository implements IDevelopersRepository {
         return developers;
     }
 
-    async getAll(): Promise<Developer[]> {
-        const developers = await this.repository.find();
-        return developers;
+    async getAll(filter?: IFilter): Promise<IPagination<Developer>> {
+        const take = filter.limit || 10
+        const skip = ((filter.page - 1) * filter.limit) || 0
+
+        const [developers, total] = await this.repository.createQueryBuilder('developers')
+            .leftJoinAndSelect('developers.qualificationLevel', 'qualificationLevels')
+            .skip(skip)
+            .take(take)
+            .getManyAndCount();
+
+        return { data: developers, total };
     }
     
     async create({id, name, gender, birthdate, hobby, qualificationLevel }: IDeveloper): Promise<Developer> {

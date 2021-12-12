@@ -1,3 +1,5 @@
+import { IFilter } from "../../../../shared/dtos/IFilter";
+import { IPagination } from "../../../../shared/dtos/IPagination";
 import { IDeveloper } from "../../dtos/IDeveloper";
 import { Developer } from "../../infra/typeorm/entities/Developer";
 import { IDevelopersRepository } from "../IDevelopersRepository";
@@ -22,9 +24,9 @@ class DeveloperRepositoryInMemory implements IDevelopersRepository {
         return developer;
     }
 
-    async getAll(): Promise<Developer[]> {
+    async getAll(filter: IFilter): Promise<IPagination<Developer>> {
         const developers = this.developers;
-        return developers;
+        return {data: developers, total: developers.length };
     }
 
     async findByQualificationLevelId(id: number): Promise<Developer[]> {

@@ -6,6 +6,7 @@ import { api } from "../../services/api";
 import { Container } from "./styles";
 import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert';
+import { roundUp } from "../../utils";
 
 interface IQualificationLevel
 {
@@ -27,10 +28,22 @@ interface IDevelopers
 
 export function ListDevelopers() {
     const navigate = useNavigate();
+    const [page, setPage] = useState<number>(1);
+    const [pages, setPages] = useState<number[]>([]);
+    const [limit, setLimit] = useState<number>(10);
     const [developers, setDevelopers] = useState<IDevelopers[]>([]);
+    const [totalDevelopers, setTotalDevelopers] = useState<number>(0);
 
-    async function loadDevelopers() {
-        await api.get('developers').then(response => setDevelopers(response.data));
+    async function loadDevelopers(paramPage?: number) {
+        const currentPage = paramPage || page;
+        setPage(currentPage);
+
+        await api.get(`developers?page=${currentPage}&limit=${limit}`).then(response => {
+            setDevelopers(response.data.data);
+            setTotalDevelopers(response.data.total);
+            const totalPages = roundUp(response.data.total / limit, 0);
+            setPages(Array.from(Array(totalPages).keys()))
+        });
     }
 
     useEffect(() => {
@@ -110,6 +123,15 @@ export function ListDevelopers() {
                             }
                         </tbody>
                     </table>
+                    <ul>
+                        {
+                            pages.map(pageNumber => 
+                                (
+                                    <li key={pageNumber} onClick={() => {loadDevelopers(pageNumber + 1)}}>{pageNumber + 1}</li>
+                                )
+                            )
+                        }
+                    </ul>
                 </Content>
             </Container>
         </>

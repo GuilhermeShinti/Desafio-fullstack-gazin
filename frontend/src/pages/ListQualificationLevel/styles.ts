@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
 
     --firstchild: #363636;
 

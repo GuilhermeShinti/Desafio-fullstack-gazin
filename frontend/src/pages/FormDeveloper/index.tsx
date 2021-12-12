@@ -36,7 +36,7 @@ export function Formdeveloper() {
     const [qualificationLevels, setQualificationLevels] = useState<IQualificationLevel[]>([]);
 
     async function loadQualificationLevels() {
-        await api.get('levels').then(response => setQualificationLevels(response.data));
+        await api.get('levels').then(response => setQualificationLevels(response.data.data));
     }
 
     useEffect(() => {

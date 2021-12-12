@@ -70,15 +70,6 @@ class QualificationLevelsRepository implements IQualificationLevelsRepository {
             .take(take)
             .getManyAndCount();
 
-        console.log(total);
-
-        // const qualificationlevels = await this.repository.createQueryBuilder('qualificationLevels')
-        //     .leftJoin('qualificationLevels.developers', 'developers')
-        //     .loadRelationCountAndMap('qualificationLevels.totalDevelopers', 'qualificationLevels.developers')
-        //     .take()
-        //     .skip()
-        //     .getMany();
-
         return {  data: qualificationlevels, total };
     }
 }

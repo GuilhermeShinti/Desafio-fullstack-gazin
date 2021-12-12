@@ -49,6 +49,6 @@ describe("Delete Developer", () => {
 
         const developers = await listDevelopersUseCase.execute();
 
-        expect(developers.length).toBe(0);
+        expect(developers.total).toBe(0);
     });
 })

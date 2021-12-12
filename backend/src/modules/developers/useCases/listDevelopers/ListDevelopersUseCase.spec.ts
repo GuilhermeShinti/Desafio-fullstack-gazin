@@ -44,6 +44,6 @@ describe("List Qualification levels", () => {
 
         const developers = await listDevelopersUseCase.execute();
 
-        expect(developers.length).toBe(10);
+        expect(developers.total).toBe(10);
     });
 })

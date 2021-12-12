@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
 
     --firstchild: #363636;
 
@@ -61,6 +61,30 @@ export const Container = styled.div`
                 &:hover {
                     filter: brightness(0.5);
                 }
+            }
+        }
+    }
+
+    ul {
+        display: flex;
+        justify-content: center;
+
+        li {
+            list-style-type: none;
+            padding: 1rem;
+            background: #fff;
+            margin: 0 0.5rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s ease-in-out;
+
+            &:hover {
+                background: #153058;
+                color: #fff;
+            }
+
+            .active {
+                background: #153058;
+                color: #fff;
             }
         }
     }
