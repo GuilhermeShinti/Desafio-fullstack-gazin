@@ -12,9 +12,6 @@ class DevelopersRepository implements IDevelopersRepository {
 
     async update({id, name, gender, birthdate, hobby, qualificationLevelId, qualificationLevel}: IDeveloper): Promise<Developer> {
         const developer = await this.repository.save({id, name, gender, birthdate, hobby, qualificationLevelId, qualificationLevel});
-
-        // await this.repository.findOne(id);
-
         return developer;
     }
 

@@ -11,6 +11,7 @@ interface IQualificationLevel
 {
     id: string;
     level: number;
+    totalDevelopers: number;
 }
 
 export function ListQualificationLevel() {
@@ -81,7 +82,7 @@ export function ListQualificationLevel() {
                                     (
                                         <tr key={qualification.id}>
                                             <td>{qualification.level}</td>
-                                            <td>1</td>
+                                            <td>{qualification.totalDevelopers}</td>
                                             <td className="actionButtons">
                                                 <button className="edit" onClick={() => {onClickEditQualificationLevel(qualification)}}>Editar</button>
                                                 <button className="delete" onClick={() => {onClickDeleteQualificationLevel(Number(qualification.id))}}>Excluir</button>

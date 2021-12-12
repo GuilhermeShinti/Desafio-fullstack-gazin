@@ -10,7 +10,9 @@ class QualificationLevel {
     level: string;
 
     @OneToMany(() => Developer, developer => developer.qualificationLevel)
-    developers: Developer[]
+    developers: Developer[];
+
+    totalDevelopers: number;
 }
 
 export { QualificationLevel };
