@@ -1,9 +1,9 @@
-{
+module.exports = {
     "type": "postgres",
-    "host": "database",
-    "username": "user",
-    "password": "123456",
-    "database": "gazin",
+    "host": process.env.DATABASE_HOST,
+    "username": process.env.DATABASE_USER,
+    "password": process.env.DATABASE_PASS,
+    "database": process.env.DATABASE_NAME,
     "entities": [
         "./src/modules/**/infra/typeorm/entities/*.ts"
     ],

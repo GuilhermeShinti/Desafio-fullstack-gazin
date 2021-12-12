@@ -43,6 +43,24 @@ class QualificationLevelsRepository implements IQualificationLevelsRepository {
     }
 
     async getAll(): Promise<QualificationLevel[]> {
+        // const take = query.take || 10
+        // const skip = query.skip || 0
+        // const keyword = query.keyword || ''
+    
+        // const [result, total] = await this.repository.findAndCount(
+        //     {
+        //         // where: { name: Like('%' + keyword + '%') }, order: { name: "DESC" },
+        //         take: take,
+        //         skip: skip
+        //     }
+        // );
+    
+        // return {
+        //     data: result,
+        //     count: total
+        // }
+
+
         const qualificationlevels = await this.repository.createQueryBuilder('qualificationLevels')
             .leftJoin('qualificationLevels.developers', 'developers')
             .loadRelationCountAndMap('qualificationLevels.totalDevelopers', 'qualificationLevels.developers')
