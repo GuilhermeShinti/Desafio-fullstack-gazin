@@ -17,13 +17,14 @@ class DeveloperRepositoryInMemory implements IDevelopersRepository {
             birthdate: data.birthdate,
             hobby: data.hobby
         });
-        
+
         this.developers.push(developer);
         return developer;
     }
 
-    getAll(): Promise<Developer[]> {
-        throw new Error("Method not implemented.");
+    async getAll(): Promise<Developer[]> {
+        const developers = this.developers;
+        return developers;
     }
 
     async findByQualificationLevelId(id: number): Promise<Developer[]> {
@@ -31,16 +32,24 @@ class DeveloperRepositoryInMemory implements IDevelopersRepository {
         return developers;
     }
 
-    findById(id: number): Promise<Developer> {
-        throw new Error("Method not implemented.");
+    async findById(id: number): Promise<Developer> {
+        const developer = this.developers.find(developer => developer.id === id);
+        return developer;
     }
 
-    delete(id: number): Promise<void> {
-        throw new Error("Method not implemented.");
+    async delete(id: number): Promise<void> {
+        const index = this.developers.findIndex(developer => developer.id === id);
+        this.developers.splice(index, 1);
     }
 
-    update(data: IDeveloper): Promise<Developer> {
-        throw new Error("Method not implemented.");
+    async update(data: IDeveloper): Promise<Developer> {
+        const index = this.developers.findIndex(developer => developer.id === data.id);
+        this.developers[index].name = data.name;
+        this.developers[index].birthdate = data.birthdate;
+        this.developers[index].gender = data.gender;
+        this.developers[index].hobby = data.hobby;
+        this.developers[index].qualificationLevelId = data.qualificationLevelId;
+        return this.developers[index];
     }
 }
 
