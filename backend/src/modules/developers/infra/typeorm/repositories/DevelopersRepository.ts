@@ -34,8 +34,8 @@ class DevelopersRepository implements IDevelopersRepository {
     }
 
     async getAll(filter?: IFilter): Promise<IPagination<Developer>> {
-        const take = filter.limit || 10
-        const skip = ((filter.page - 1) * filter.limit) || 0
+        const take = filter.limit || 10;
+        const skip = ((filter.page - 1) * filter.limit) || 0;
 
         const [developers, total] = await this.repository.createQueryBuilder('developers')
             .leftJoinAndSelect('developers.qualificationLevel', 'qualificationLevels')

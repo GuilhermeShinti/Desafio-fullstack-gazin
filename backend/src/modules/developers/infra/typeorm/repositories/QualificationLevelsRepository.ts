@@ -46,22 +46,9 @@ class QualificationLevelsRepository implements IQualificationLevelsRepository {
     }
 
     async getAll(filter?: IFilter): Promise<IPagination<QualificationLevel>> {
-        const take = filter.limit || 10
-        const skip = ((filter.page - 1) * filter.limit) || 0
-        // const keyword = query.keyword || ''
-    
-        // const [result, total] = await this.repository.findAndCount(
-        //     {
-        //         // where: { name: Like('%' + keyword + '%') }, order: { name: "DESC" },
-        //         take: take,
-        //         skip: skip
-        //     }
-        // );
-    
-        // return {
-        //     data: result,
-        //     count: total
-        // }
+        const take = filter.limit || 10;
+        const skip = ((filter.page - 1) * filter.limit) || 0;
+        // const keyword = query.keyword || '';
 
         const [qualificationlevels, total] = await this.repository.createQueryBuilder('qualificationLevels')
             .leftJoin('qualificationLevels.developers', 'developers')
