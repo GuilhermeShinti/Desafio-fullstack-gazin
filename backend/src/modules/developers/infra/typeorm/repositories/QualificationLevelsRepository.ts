@@ -4,6 +4,9 @@ import { QualificationLevel } from "../entities/QualificationLevel";
 import { IQualificationLevelsRepository } from "../../../repositories/IQualificationLevelsRepository";
 import { IQualificationLevel } from "../../../dtos/IQualificationLevel";
 
+import { IPagination } from "../../../../../shared/dtos/IPagination";
+import { IFilter } from "../../../../../shared/dtos/IFilter";
+
 class QualificationLevelsRepository implements IQualificationLevelsRepository {
     private repository: Repository<QualificationLevel>
 
@@ -42,9 +45,9 @@ class QualificationLevelsRepository implements IQualificationLevelsRepository {
         return qualificationLevel;
     }
 
-    async getAll(): Promise<QualificationLevel[]> {
-        // const take = query.take || 10
-        // const skip = query.skip || 0
+    async getAll(filter?: IFilter): Promise<IPagination<QualificationLevel>> {
+        const take = filter.limit || 10
+        const skip = ((filter.page - 1) * filter.limit) || 0
         // const keyword = query.keyword || ''
     
         // const [result, total] = await this.repository.findAndCount(
@@ -60,13 +63,23 @@ class QualificationLevelsRepository implements IQualificationLevelsRepository {
         //     count: total
         // }
 
-
-        const qualificationlevels = await this.repository.createQueryBuilder('qualificationLevels')
+        const [qualificationlevels, total] = await this.repository.createQueryBuilder('qualificationLevels')
             .leftJoin('qualificationLevels.developers', 'developers')
             .loadRelationCountAndMap('qualificationLevels.totalDevelopers', 'qualificationLevels.developers')
-            .getMany();
+            .skip(skip)
+            .take(take)
+            .getManyAndCount();
 
-        return qualificationlevels;
+        console.log(total);
+
+        // const qualificationlevels = await this.repository.createQueryBuilder('qualificationLevels')
+        //     .leftJoin('qualificationLevels.developers', 'developers')
+        //     .loadRelationCountAndMap('qualificationLevels.totalDevelopers', 'qualificationLevels.developers')
+        //     .take()
+        //     .skip()
+        //     .getMany();
+
+        return {  data: qualificationlevels, total };
     }
 }
 

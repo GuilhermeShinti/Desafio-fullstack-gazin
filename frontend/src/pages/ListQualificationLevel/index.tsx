@@ -6,6 +6,7 @@ import { api } from "../../services/api";
 import { Container } from "./styles";
 import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert';
+import { roundUp } from "../../utils";
 
 interface IQualificationLevel
 {
@@ -16,10 +17,22 @@ interface IQualificationLevel
 
 export function ListQualificationLevel() {
     const navigate = useNavigate();
+    const [page, setPage] = useState<number>(1);
+    const [pages, setPages] = useState<number[]>([]);
+    const [limit, setLimit] = useState<number>(10);
     const [qualificationLevels, setQualificationLevels] = useState<IQualificationLevel[]>([]);
+    const [totalQualification, setTotalQualification] = useState<number>(0);
 
-    async function loadQualificationLevels() {
-        await api.get('levels').then(response => setQualificationLevels(response.data));
+    async function loadQualificationLevels(paramPage?: number) {
+        const currentPage = paramPage || page;
+        setPage(currentPage);
+
+        await api.get(`levels?page=${currentPage}&limit=${limit}`).then(response => {
+            setQualificationLevels(response.data.data);
+            setTotalQualification(response.data.total);
+            const totalPages = roundUp(response.data.total / limit, 0);
+            setPages(Array.from(Array(totalPages).keys()))
+        });
     }
 
     useEffect(() => {
@@ -93,6 +106,15 @@ export function ListQualificationLevel() {
                             }
                         </tbody>
                     </table>
+                    <ul>
+                        {
+                            pages.map(pageNumber => 
+                                (
+                                    <li key={pageNumber} onClick={() => {loadQualificationLevels(pageNumber + 1)}}>{pageNumber + 1}</li>
+                                )
+                            )
+                        }
+                    </ul>
                 </Content>
             </Container>
         </>

@@ -37,7 +37,7 @@ describe("Delete Qualification level", () => {
 
         const qualificationlevels = await listQualificationLevelUseCase.execute();
 
-        expect(qualificationlevels.length).toBe(0);
+        expect(qualificationlevels.data.length).toBe(0);
     })
 
     it("should not be able to delete qualification level when developers is associated", async () => {
@@ -57,7 +57,7 @@ describe("Delete Qualification level", () => {
             }
     
             const createdQualification = await createQualificationLevelUseCase.execute(newQualification);
-            
+
             await createDeveloperUseCase.execute(newDevelopers);
             await deleteQualificationLevelUseCase.execute(createdQualification.id);
         }).rejects.toBeInstanceOf(AppError);

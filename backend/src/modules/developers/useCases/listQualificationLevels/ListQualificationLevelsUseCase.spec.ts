@@ -26,6 +26,6 @@ describe("List Qualification levels", () => {
 
         const qualificationLevels = await listQualificationLevelsUseCase.execute();
 
-        expect(qualificationLevels.length).toBe(10);
+        expect(qualificationLevels.data.length).toBe(10);
     })
 })

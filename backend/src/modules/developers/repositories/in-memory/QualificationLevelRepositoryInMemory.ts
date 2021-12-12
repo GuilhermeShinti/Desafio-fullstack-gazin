@@ -1,3 +1,4 @@
+import { IPagination } from "../../../../shared/dtos/IPagination";
 import { IQualificationLevel } from "../../dtos/IQualificationLevel";
 import { QualificationLevel } from "../../infra/typeorm/entities/QualificationLevel";
 import { IQualificationLevelsRepository } from "../IQualificationLevelsRepository";
@@ -24,9 +25,9 @@ class QualificationLevelRepositoryInMemory implements IQualificationLevelsReposi
         return qualification;
     }
 
-    async getAll(): Promise<QualificationLevel[]> {
+    async getAll(): Promise<IPagination<QualificationLevel>> {
         const qualificationLevels = this.qualificationLevels;
-        return qualificationLevels;
+        return {data: qualificationLevels, total: qualificationLevels.length };
     }
 
     async delete(id: number): Promise<void> {
