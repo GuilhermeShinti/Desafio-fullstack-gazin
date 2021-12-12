@@ -33,7 +33,7 @@ class CreateDeveloperUseCase {
             throw new AppError("Informe o nível do Desenvolvedor.")
         }
 
-        const developer = await this.developersRepository.create({id, name, gender, birthdate, hobby, qualificationLevel });
+        const developer = await this.developersRepository.create({id, name, gender, birthdate, hobby, qualificationLevel, qualificationLevelId });
 
         return developer;
     }
