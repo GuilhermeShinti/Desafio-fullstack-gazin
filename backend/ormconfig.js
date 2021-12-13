@@ -1,6 +1,7 @@
 module.exports = {
     "type": "postgres",
     "host": process.env.DATABASE_HOST,
+    "port": process.env.DATABASE_PORT,
     "username": process.env.DATABASE_USER,
     "password": process.env.DATABASE_PASS,
     "database": process.env.DATABASE_NAME,
@@ -13,5 +14,8 @@ module.exports = {
     "cli": {
         "migrationsDir": "./src/shared/infra/typeorm/migrations"
     },
-    "synchronize": false
+    "synchronize": false,
+    "ssl": { 
+        rejectUnauthorized: false 
+    }
 }

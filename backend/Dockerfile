@@ -8,4 +8,4 @@ RUN npm install
 
 COPY . /backend/
 
-EXPOSE 3333
+EXPOSE ${PORT}
